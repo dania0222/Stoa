@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parrilla de contenido · Noviembre y diciembre 2026</title>
+<style>
+:root{--ink:#292638;--muted:#777487;--line:#e9e6ef;--bg:#f7f5fa;--purple:#7054a5;--lav:#eee8f8;--pink:#f9e8ee;--gold:#fff1d6;--green:#e4f3eb;--blue:#e6f0fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:25px clamp(16px,4vw,48px);background:#fff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+h1{font-size:clamp(22px,3vw,30px);margin:0 0 4px}header p{margin:0;color:var(--muted)}
+button,input,select,textarea{font:inherit}button{border:0;border-radius:10px;padding:10px 14px;background:var(--purple);color:white;cursor:pointer;font-weight:650}button.secondary{background:#f0edf5;color:var(--ink);border:1px solid var(--line)}button.danger{background:#fff0f0;color:#a33}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;padding:20px clamp(12px,3vw,36px);max-width:1600px;margin:auto}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0;box-shadow:0 3px 14px #30234d08}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.monthnav{display:flex;gap:8px;align-items:center}.monthnav strong{font-size:18px;min-width:180px;text-align:center}
+.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:10px 0 14px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.weekday{padding:8px 4px;text-align:center;color:var(--muted);font-weight:700;font-size:11px;background:#fbfafd;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.day{min-height:132px;padding:6px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:white;min-width:0}
+.day.out{background:#faf9fc;color:#b6b2c0}.day.today{outline:2px solid var(--purple);outline-offset:-2px}.day.buenfin{background:linear-gradient(150deg,#fff8e8,#fff 65%)}
+.daytop{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-weight:700;font-size:12px}.eventtag{font-size:9px;color:#8b5a16;background:var(--gold);padding:2px 5px;border-radius:6px}
+.card{border-radius:8px;padding:6px 7px;margin:4px 0;font-size:11px;cursor:grab;border-left:3px solid var(--purple);background:var(--lav);overflow-wrap:anywhere}
+.card[data-format="Reel"]{background:var(--pink);border-color:#c36b8d}.card[data-format="Carrusel"]{background:var(--blue);border-color:#5487bd}.card[data-format="Estático"]{background:var(--green);border-color:#5c9b77}
+.card b{display:block;font-size:11px}.meta{color:#625d70;font-size:10px}.status{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.drop-hint{font-size:10px;color:#aaa;text-align:center;padding:4px}.day.dragover{background:#f1eafa}
+.sidebar{display:flex;flex-direction:column;gap:14px}.sidebar h2{font-size:16px;margin:0 0 10px}.field{display:grid;gap:4px;margin:9px 0}.field label{font-size:11px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px;background:white;color:var(--ink)}.field textarea{min-height:62px;resize:vertical}
+.pool{min-height:100px;padding:8px;border:1px dashed #c9c1d7;border-radius:10px;background:#fcfbfe}.pool .card{cursor:grab}
+.actions{display:flex;gap:7px;flex-wrap:wrap}.actions button{font-size:12px;padding:8px 10px}
+.note{font-size:12px;color:var(--muted)}.keydates{background:linear-gradient(135deg,#fff8e8,#fff);border-color:#f2dfb8}.keydates li{margin:6px 0;font-size:12px}
+.progress{height:7px;background:#eeeaf3;border-radius:9px;overflow:hidden}.progress span{display:block;height:100%;background:var(--purple);width:0}
+#preview{font-size:12px;color:var(--muted);margin-top:10px}.empty{color:#aaa;font-size:11px;padding:8px}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.sidebar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.layout{padding:10px}.sidebar{display:flex}.day{min-height:100px;padding:4px}.card{padding:4px;font-size:10px}.card .meta{display:none}.monthnav strong{min-width:145px}.weekday{font-size:9px}}
+</style>
+</head>
+<body>
+<header><div><h1>Parrilla de contenido</h1><p>Calendario editorial · Noviembre y diciembre 2026</p></div><div class="actions"><button class="secondary" id="export">Exportar respaldo</button><button class="secondary" id="importBtn">Importar respaldo</button><input id="importFile" type="file" accept="application/json" hidden><button id="addBtn">+ Nuevo contenido</button></div></header>
+<div class="layout">
+<main class="panel">
+ <div class="toolbar"><div class="monthnav"><button class="secondary" id="prev">‹</button><strong id="monthTitle"></strong><button class="secondary" id="next">›</button></div><div class="actions"><button class="secondary" id="auto">Distribuir 3 por semana</button><button class="secondary" id="clearView">Ver mes completo</button></div></div>
+ <div class="legend"><span><i class="dot" style="background:#7054a5"></i>En idea / pendiente</span><span><i class="dot" style="background:#5487bd"></i>Carrusel</span><span><i class="dot" style="background:#c36b8d"></i>Reel</span><span><i class="dot" style="background:#5c9b77"></i>Estático</span><span>Arrastra las tarjetas entre fechas o de regreso al banco.</span></div>
+ <div class="calendar" id="calendar"></div><div id="preview"></div>
+</main>
+<aside class="sidebar">
+ <section class="panel"><h2>Banco de contenidos</h2><p class="note">Agrega aquí ideas o materiales sin fecha. Después arrástralos al día que quieras.</p><div id="pool" class="pool" data-drop="pool" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="dropItem(event,'pool')" ></div><div class="field"><label>Nombre del contenido</label><input id="newTitle" placeholder="Ej. Tips para cuidar tus rizos"></div><div class="field"><label>Formato</label><select id="newFormat"><option>Carrusel</option><option>Estático</option><option>Reel</option><option>Historias</option></select></div><div class="field"><label>Estado</label><select id="newStatus"><option>Pendiente</option><option>Listo</option><option>Programado</option><option>Pautado</option></select></div><div class="field"><label>Notas / CTA (opcional)</label><textarea id="newNotes" placeholder="Material disponible, copy, CTA..."></textarea></div><button id="create" style="width:100%">Agregar al banco</button></section>
+ <section class="panel"><h2>Editar contenido</h2><div id="editorEmpty" class="empty">Selecciona una tarjeta del calendario o del banco para editarla.</div><div id="editor" hidden>
+ <div class="field"><label>Nombre</label><input id="editTitle"></div><div class="field"><label>Formato</label><select id="editFormat"><option>Carrusel</option><option>Estático</option><option>Reel</option><option>Historias</option></select></div><div class="field"><label>Estado</label><select id="editStatus"><option>Pendiente</option><option>Listo</option><option>Programado</option><option>Pautado</option></select></div><div class="field"><label>Notas / CTA</label><textarea id="editNotes"></textarea></div><div class="actions"><button id="save">Guardar cambios</button><button class="danger" id="delete">Eliminar</button></div></div></section>
+ <section class="panel keydates"><h2>Fechas clave · Buen Fin 2026</h2><ul><li><b>1 de noviembre:</b> inicio de la ventana autorizada para difusión de la campaña.</li><li><b>12 de noviembre:</b> fecha límite de registro de comercios participantes.</li><li><b>13–17 de noviembre:</b> El Buen Fin 2026.</li><li><b>27 de noviembre:</b> consulta de participación en el sorteo.</li><li><b>4 de diciembre:</b> sorteo del SAT, 12:00 h.</li><li><b>7 de diciembre:</b> publicación de resultados del sorteo.</li></ul><p class="note">Los días del Buen Fin están resaltados en dorado en el calendario. Verifica las condiciones de participación y uso de marca en el sitio oficial.</p></section>
+ <section class="panel"><h2>Ritmo de publicaciones</h2><div id="weekCount" class="note">0 contenidos fechados</div><div class="progress"><span id="progressBar"></span></div><p class="note">La distribución automática coloca hasta 3 contenidos por semana en días sugeridos (martes, jueves y sábado), sin mover los que ya tienen fecha. Puedes reorganizar todo arrastrando las tarjetas.</p></section>
+</aside>
+</div>
+<script>
+const months=[{m:10,y:2026},{m:11,y:2026}];let view=0,items=[],selected=null;
+const bf={ '2026-11-13':'Inicio Buen Fin','2026-11-14':'Buen Fin','2026-11-15':'Buen Fin','2026-11-16':'Buen Fin','2026-11-17':'Cierre Buen Fin'};
+const extra={'2026-11-01':'Inicio difusión','2026-11-12':'Límite registro','2026-11-27':'Consulta sorteo','2026-12-04':'Sorteo SAT · 12:00','2026-12-07':'Resultados sorteo'};
+const $=id=>document.getElementById(id);
+const key=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const uid=()=>Math.random().toString(36).slice(2,10);
+function saveData(){localStorage.setItem('parrillaNovDic2026',JSON.stringify(items));render()}
+function load(){try{items=JSON.parse(localStorage.getItem('parrillaNovDic2026')||'[]')}catch{items=[]}render()}
+function cardHTML(x){return `<div class="card" draggable="true" data-id="${x.id}" data-format="${x.format}" onclick="selectItem('${x.id}')" ondragstart="dragStart(event,'${x.id}')"><b>${esc(x.title)}</b><span class="meta">${esc(x.format)} · <span class="status">${esc(x.status)}</span></span></div>`}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){const {m,y}=months[view];$('monthTitle').textContent=new Date(y,m,1).toLocaleDateString('es-MX',{month:'long',year:'numeric'});let out=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'].map(x=>`<div class="weekday">${x}</div>`).join('');let first=new Date(y,m,1),start=new Date(y,m,1-first.getDay());for(let i=0;i<42;i++){let d=new Date(start);d.setDate(start.getDate()+i);let k=key(d),inMonth=d.getMonth()===m;let dayItems=items.filter(x=>x.date===k);let tag=bf[k]||extra[k]||'';out+=`<div class="day ${inMonth?'':'out'} ${bf[k]?'buenfin':''}" data-drop="${k}" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="dropItem(event,'${k}')"><div class="daytop"><span>${d.getDate()}</span>${tag?`<span class="eventtag">${tag}</span>`:''}</div>${dayItems.map(cardHTML).join('')}<div class="drop-hint">${dayItems.length?'':'+'}</div></div>`} $('calendar').innerHTML=out;$('pool').innerHTML=items.filter(x=>!x.date).map(cardHTML).join('')||'<div class="empty">Tu banco está vacío por ahora.</div>';$('weekCount').textContent=`${items.filter(x=>x.date).length} contenidos fechados · objetivo: 3 por semana`;$('progressBar').style.width=Math.min(100,items.filter(x=>x.date).length/26*100)+'%';let n=items.filter(x=>x.date&&x.date.startsWith('2026-11')).length,d=items.filter(x=>x.date&&x.date.startsWith('2026-12')).length;$('preview').textContent=`Vista rápida: ${n} contenidos programados en noviembre · ${d} en diciembre.`}
+function dragStart(e,id){e.dataTransfer.setData('text/plain',id);e.dataTransfer.effectAllowed='move'}
+function allowDrop(e){e.preventDefault();e.currentTarget.classList.add('dragover')}function leaveDrop(e){e.currentTarget.classList.remove('dragover')}
+function dropItem(e,date){e.preventDefault();e.currentTarget.classList.remove('dragover');let id=e.dataTransfer.getData('text/plain'),x=items.find(a=>a.id===id);if(x){x.date=date==='pool'?'':date;saveData()}}
+function selectItem(id){selected=id;let x=items.find(a=>a.id===id);if(!x)return;$('editorEmpty').hidden=true;$('editor').hidden=false;$('editTitle').value=x.title;$('editFormat').value=x.format;$('editStatus').value=x.status;$('editNotes').value=x.notes||''}
+$('create').onclick=()=>{let title=$('newTitle').value.trim();if(!title){alert('Escribe un nombre para el contenido.');return}items.push({id:uid(),title,format:$('newFormat').value,status:$('newStatus').value,notes:$('newNotes').value,date:''});$('newTitle').value='';$('newNotes').value='';saveData()};
+$('addBtn').onclick=()=>$('newTitle').focus();
+$('save').onclick=()=>{let x=items.find(a=>a.id===selected);if(!x)return;x.title=$('editTitle').value.trim()||'Sin título';x.format=$('editFormat').value;x.status=$('editStatus').value;x.notes=$('editNotes').value;saveData()};
+$('delete').onclick=()=>{if(!selected)return;items=items.filter(x=>x.id!==selected);selected=null;$('editor').hidden=true;$('editorEmpty').hidden=false;saveData()};
+$('prev').onclick=()=>{view=Math.max(0,view-1);render()};$('next').onclick=()=>{view=Math.min(1,view+1);render()};$('clearView').onclick=()=>{view=0;render()};
+$('auto').onclick=()=>{let weekdays=[2,4,6],dates=[];for(let m=10;m<=11;m++){let last=new Date(2026,m+1,0).getDate();for(let day=1;day<=last;day++){let d=new Date(2026,m,day);if(weekdays.includes(d.getDay()))dates.push(key(d))}}let free=dates.filter(d=>!items.some(x=>x.date===d));let undated=items.filter(x=>!x.date);undated.forEach((x,i)=>{if(free[i])x.date=free[i]});saveData();alert(`Se acomodaron ${Math.min(undated.length,free.length)} contenidos en fechas sugeridas (martes, jueves y sábado). Los demás permanecen en el banco.`)};
+$('export').onclick=()=>{let blob=new Blob([JSON.stringify(items,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='respaldo-parrilla-2026.json';a.click();URL.revokeObjectURL(a.href)};
+$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let v=JSON.parse(r.result);if(Array.isArray(v)){items=v;saveData()}else alert('El archivo no tiene el formato esperado.')}catch{alert('No se pudo leer el respaldo.')}};r.readAsText(f)};
+load();
+</script>
+</body></html>
